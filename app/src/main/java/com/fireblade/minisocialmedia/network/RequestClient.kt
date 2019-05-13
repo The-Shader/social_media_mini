@@ -1,30 +1,26 @@
 package com.fireblade.minisocialmedia.network
 
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-class RequestClient {
+class RequestClient @Inject constructor(private val httpClient: OkHttpClient,
+                                        private val rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
+                                        private val gsonConverterFactory: GsonConverterFactory) {
 
-  companion object {
+  private val retrofit by lazy {
 
-    private lateinit var retrofit: Retrofit
+    Retrofit.Builder()
+      .baseUrl("http://jsonplaceholder.typicode.com")
+      .addCallAdapterFactory(rxJava2CallAdapterFactory)
+      .addConverterFactory(gsonConverterFactory)
+      .client(httpClient)
+      .build()
+  }
 
-    fun getClient() : Retrofit {
-      val interceptor =  HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
-
-      val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
-
-      retrofit = Retrofit.Builder()
-        .baseUrl("http://jsonplaceholder.typicode.com")
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .addConverterFactory(GsonConverterFactory.create())
-        .client(client)
-        .build()
-
-      return retrofit
-    }
+  fun getClient() : Retrofit {
+    return retrofit
   }
 }
