@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.fireblade.minisocialmedia.model.Comment
 import com.fireblade.minisocialmedia.model.Post
 import com.fireblade.minisocialmedia.model.User
 import com.fireblade.minisocialmedia.network.RequestClient
@@ -14,7 +15,7 @@ import com.fireblade.minisocialmedia.network.RequestInterface
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.functions.BiFunction
+import io.reactivex.functions.Function3
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -34,8 +35,9 @@ class HomeFragment : Fragment() {
     super.onViewCreated(view, savedInstanceState)
     list_of_posts.adapter = postAdapter
 
-    list_of_posts.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply { setDrawable(resources.getDrawable(R.drawable.divider_item_decoration, null)) })
-
+    list_of_posts.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
+      setDrawable(resources.getDrawable(R.drawable.divider_item_decoration, null))
+    })
 
     requestInterface = RequestClient.getClient().create(RequestInterface::class.java)
 
@@ -43,23 +45,15 @@ class HomeFragment : Fragment() {
 
     val observableUsers = requestInterface.getUsers().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
 
-    Observable.zip(observableUsers, observablePosts, BiFunction<List<User>, List<Post>, List<PostItem>> { userList, postList -> return@BiFunction createPostItem(userList, postList)})
+    val observableComments = requestInterface.getComments().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+
+    Observable.zip(observableUsers, observablePosts, observableComments,
+      Function3<List<User>, List<Post>, List<Comment>, List<PostItem>> { userList, postList, commentList ->
+        return@Function3 createPostItem(userList, postList, commentList)
+      })
       .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(this::handleResponse, this::handleError).apply {
         subscribers.add(this)
       }
-
-    //postAdapter.items = createPosts()
-  }
-
-  private fun createPosts() : List<PostItem> {
-
-    val post1 = PostItem("Working here", "It is true awesome", "Alain", 3)
-    val post2 = PostItem("Paris", "Paris is so hot right now", "Ian", 152)
-    val post3 = PostItem("Today's World", "The AI is going to eat the world", "Rebeca", 41)
-    val post4 = PostItem("Cryptocurrencies", "It doesn't matter whether it's good or bad: it's progression", "Ana", 24)
-    val post5 = PostItem("Too late", "Go to the Gym!", "Jeff", 2)
-
-    return listOf(post1, post2, post3, post4, post5)
   }
 
   private fun handleResponse(postItems: List<PostItem>) {
@@ -70,12 +64,18 @@ class HomeFragment : Fragment() {
     Toast.makeText(context, "An error occurred while loading data from the network. Check your internet connection.", Toast.LENGTH_SHORT).show()
   }
 
-  private fun createPostItem(userList: List<User>, postList: List<Post>) : List<PostItem> {
+  private fun createPostItem(userList: List<User>, postList: List<Post>, commentList: List<Comment>) : List<PostItem> {
 
     val postItems = mutableListOf<PostItem>()
 
     postList.map { post ->
-      postItems.add(PostItem(post.title, post.body, userList.find { user -> user.id == post.userId }?.name ?: "Unknown User"))
+      postItems.add(PostItem(post.title,
+        post.body,
+        userList.find { user ->
+          user.id == post.userId }?.name ?: "Unknown User",
+        commentList.count { comment ->
+          comment.postId == post.id
+        }))
     }
 
     return postItems
