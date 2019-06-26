@@ -14,6 +14,6 @@ class ListViewFragmentModule {
   fun provideRequestInterface() : IRequestService = IRequestService.create()
 
   @Provides
-  fun provideHomePresenter(fragment: ListViewFragment, requestService: IRequestService) : IListPresenter =
+  fun provideListViewPresenter(fragment: ListViewFragment, requestService: IRequestService) : IListPresenter =
     ListViewPresenter(fragment, requestService)
 }
