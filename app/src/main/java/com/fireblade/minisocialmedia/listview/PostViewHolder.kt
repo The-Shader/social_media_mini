@@ -1,4 +1,4 @@
-package com.fireblade.minisocialmedia
+package com.fireblade.minisocialmedia.listview
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

@@ -1,8 +1,9 @@
-package com.fireblade.minisocialmedia
+package com.fireblade.minisocialmedia.listview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.fireblade.minisocialmedia.R
 
 class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -15,7 +16,13 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
   override fun getItemCount(): Int = items.size
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-    return PostViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.post_list_item, parent, false))
+    return PostViewHolder(
+      LayoutInflater.from(parent.context).inflate(
+        R.layout.post_list_item,
+        parent,
+        false
+      )
+    )
   }
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

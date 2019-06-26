@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -55,4 +57,7 @@ dependencies {
 
     api 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     api 'com.squareup.okhttp3:okhttp:3.12.1'
+
+    kapt "com.google.dagger:dagger-compiler:${dagger_version}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger_version}"
 }

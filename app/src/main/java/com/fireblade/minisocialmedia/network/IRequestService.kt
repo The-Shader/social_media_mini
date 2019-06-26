@@ -6,7 +6,7 @@ import com.fireblade.minisocialmedia.model.User
 import io.reactivex.Observable
 import retrofit2.http.GET
 
-interface RequestInterface {
+interface IRequestService {
 
   @GET("/posts")
   fun getPosts() : Observable<List<Post>>
@@ -16,4 +16,11 @@ interface RequestInterface {
 
   @GET("/comments")
   fun getComments() : Observable<List<Comment>>
+
+  companion object Factory {
+
+    fun create() : IRequestService {
+      return RequestClient.getClient().create(IRequestService::class.java)
+    }
+  }
 }
