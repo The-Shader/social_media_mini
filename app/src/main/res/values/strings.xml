@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Mini Social Media</string>
+    <string name="comments">Comments: %d</string>
+</resources>
