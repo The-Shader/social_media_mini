@@ -24,7 +24,7 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
       holder.title.text = postItem.title
       holder.body.text = postItem.body
       holder.author.text = postItem.author
-      holder.numOfComments.text = "Comments: ${postItem.numOfComments}"
+      holder.numOfComments.text = postItem.numOfComments.toString()
     }
   }
 }
