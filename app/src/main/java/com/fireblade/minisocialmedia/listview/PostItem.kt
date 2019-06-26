@@ -1,3 +1,30 @@
 package com.fireblade.minisocialmedia.listview
 
-class PostItem(val title: String, val body: String, val author: String, val numOfComments: Int = 0)
+import android.os.Parcel
+import android.os.Parcelable
+
+data class PostItem(val title: String, val body: String, val author: String, val numOfComments: Int = 0) : Parcelable {
+
+  constructor(parcel: Parcel) : this(parcel.readString() ?: "", parcel.readString()?: "", parcel.readString()?: "", parcel.readInt())
+
+  companion object CREATOR : Parcelable.Creator<PostItem> {
+    override fun createFromParcel(source: Parcel): PostItem {
+      return PostItem(source)
+    }
+
+    override fun newArray(size: Int): Array<PostItem?> {
+      return arrayOfNulls(size)
+    }
+  }
+
+  override fun writeToParcel(parcel: Parcel, flags: Int) {
+    parcel.writeString(title)
+    parcel.writeString(body)
+    parcel.writeString(author)
+    parcel.writeInt(numOfComments)
+  }
+
+  override fun describeContents(): Int {
+    return 0
+  }
+}

@@ -27,11 +27,7 @@ class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     if (holder is PostViewHolder) {
-      val postItem = items[position]
-      holder.title.text = postItem.title
-      holder.body.text = postItem.body
-      holder.author.text = postItem.author
-      holder.numOfComments.text = postItem.numOfComments.toString()
+      holder.bindPostItem(items[position])
     }
   }
 }
