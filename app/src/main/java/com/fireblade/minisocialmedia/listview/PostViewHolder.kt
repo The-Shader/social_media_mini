@@ -8,10 +8,6 @@ import kotlinx.android.synthetic.main.post_list_item.view.*
 
 class PostViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
-  /*val title = view.title_textview
-  val body = view.body_textview
-  val author = view.author_textview
-  val numOfComments = view.num_of_comments_textview*/
   lateinit var postItem: PostItem
 
   init {
@@ -22,6 +18,7 @@ class PostViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickLi
     val context = itemView.context.applicationContext
     val showPostIntent = Intent(context, DetailsActivity::class.java)
     showPostIntent.putExtra(POST_KEY, postItem)
+    showPostIntent.flags += Intent.FLAG_ACTIVITY_NEW_TASK
     context.startActivity(showPostIntent)
   }
 
