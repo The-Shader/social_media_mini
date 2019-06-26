@@ -8,18 +8,19 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.fireblade.minisocialmedia.model.Post
+import com.fireblade.minisocialmedia.model.User
 import com.fireblade.minisocialmedia.network.RequestClient
 import com.fireblade.minisocialmedia.network.RequestInterface
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.BiFunction
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
   private val postAdapter: PostAdapter by lazy { PostAdapter() }
-
-  private lateinit var items: MutableList<PostItem>
 
   private lateinit var requestInterface: RequestInterface
 
@@ -38,9 +39,14 @@ class HomeFragment : Fragment() {
 
     requestInterface = RequestClient.getClient().create(RequestInterface::class.java)
 
-    requestInterface.getPosts().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(this::handleResponse, this::handleError).apply {
-      subscribers.add(this)
-    }
+    val observablePosts = requestInterface.getPosts().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+
+    val observableUsers = requestInterface.getUsers().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+
+    Observable.zip(observableUsers, observablePosts, BiFunction<List<User>, List<Post>, List<PostItem>> { userList, postList -> return@BiFunction createPostItem(userList, postList)})
+      .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(this::handleResponse, this::handleError).apply {
+        subscribers.add(this)
+      }
 
     //postAdapter.items = createPosts()
   }
@@ -56,19 +62,22 @@ class HomeFragment : Fragment() {
     return listOf(post1, post2, post3, post4, post5)
   }
 
-  private fun handleResponse(posts: List<Post>) {
-
-    items = mutableListOf()
-
-    posts.map { post ->
-      items.add(PostItem(post.title, post.body, "Test Author"))
-    }
-
-    postAdapter.items = items
+  private fun handleResponse(postItems: List<PostItem>) {
+    postAdapter.items = postItems
   }
 
   private fun handleError(error: Throwable) {
     Toast.makeText(context, "An error occurred while loading data from the network. Check your internet connection.", Toast.LENGTH_SHORT).show()
-    println("handle error ${error.message}")
+  }
+
+  private fun createPostItem(userList: List<User>, postList: List<Post>) : List<PostItem> {
+
+    val postItems = mutableListOf<PostItem>()
+
+    postList.map { post ->
+      postItems.add(PostItem(post.title, post.body, userList.find { user -> user.id == post.userId }?.name ?: "Unknown User"))
+    }
+
+    return postItems
   }
 }
