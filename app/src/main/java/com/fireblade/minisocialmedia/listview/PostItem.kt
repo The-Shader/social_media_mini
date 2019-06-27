@@ -3,9 +3,9 @@ package com.fireblade.minisocialmedia.listview
 import android.os.Parcel
 import android.os.Parcelable
 
-data class PostItem(val title: String, val body: String, val author: String, val numOfComments: Int = 0) : Parcelable {
+data class PostItem(val id: Int, val title: String, val body: String, val author: String, val numOfComments: Int = 0) : Parcelable {
 
-  constructor(parcel: Parcel) : this(parcel.readString() ?: "", parcel.readString()?: "", parcel.readString()?: "", parcel.readInt())
+  constructor(parcel: Parcel) : this(parcel.readInt(),parcel.readString() ?: "", parcel.readString()?: "", parcel.readString()?: "", parcel.readInt())
 
   companion object CREATOR : Parcelable.Creator<PostItem> {
     override fun createFromParcel(source: Parcel): PostItem {
@@ -18,6 +18,7 @@ data class PostItem(val title: String, val body: String, val author: String, val
   }
 
   override fun writeToParcel(parcel: Parcel, flags: Int) {
+    parcel.writeInt(id)
     parcel.writeString(title)
     parcel.writeString(body)
     parcel.writeString(author)

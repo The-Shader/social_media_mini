@@ -26,28 +26,21 @@ class ListViewPresenter @Inject constructor(
 
     Observable.zip(observableUsers, observablePosts, observableComments,
       Function3<List<User>, List<Post>, List<Comment>, List<PostItem>> { userList, postList, commentList ->
-        return@Function3 createPostItem(userList, postList, commentList)
+        return@Function3 createPostItems(userList, postList, commentList)
       })
       .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(view::setPostItems, view::handleError)
   }
 
-  private fun createPostItem(userList: List<User>, postList: List<Post>, commentList: List<Comment>) : List<PostItem> {
+  private fun createPostItems(userList: List<User>, postList: List<Post>, commentList: List<Comment>) : List<PostItem> {
 
-    val postItems = mutableListOf<PostItem>()
-
-    postList.map { post ->
-      postItems.add(
-        PostItem(post.title,
-          post.body,
-          userList.find { user ->
-            user.id == post.userId
-          }?.name ?: "Unknown User",
-          commentList.count { comment ->
-            comment.postId == post.id
-          })
+    return postList.map { post ->
+      PostItem(
+        post.id,
+        post.title,
+        post.body,
+        userList.find { user -> user.id == post.userId }?.name ?: "Unknown User",
+        commentList.count { comment -> comment.postId == post.id }
       )
     }
-
-    return postItems
   }
 }

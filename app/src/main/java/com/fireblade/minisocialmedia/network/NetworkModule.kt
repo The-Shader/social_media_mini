@@ -9,6 +9,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 class NetworkModule {
+
+  @Provides
+  fun provideRequestService(requestClient: RequestClient) : IRequestService = IRequestService.create(requestClient)
+
   @Provides
   fun provideRequestClient(httpClient: OkHttpClient, rxJava2CallAdapterFactory: RxJava2CallAdapterFactory, gsonConverterFactory: GsonConverterFactory) =
     RequestClient(httpClient, rxJava2CallAdapterFactory, gsonConverterFactory)
