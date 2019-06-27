@@ -1,11 +1,12 @@
 package com.fireblade.minisocialmedia.listview
 
+import android.graphics.Color
 import android.os.Parcel
 import android.os.Parcelable
 
-data class PostItem(val id: Int, val title: String, val body: String, val author: String, val numOfComments: Int = 0) : Parcelable {
+data class PostItem(val id: Int, val title: String, val body: String, val author: String, val numOfComments: Int = 0, val avatarColor: Int = Color.WHITE) : Parcelable {
 
-  constructor(parcel: Parcel) : this(parcel.readInt(),parcel.readString() ?: "", parcel.readString()?: "", parcel.readString()?: "", parcel.readInt())
+  constructor(parcel: Parcel) : this(parcel.readInt(),parcel.readString() ?: "", parcel.readString()?: "", parcel.readString()?: "", parcel.readInt(), parcel.readInt())
 
   companion object CREATOR : Parcelable.Creator<PostItem> {
     override fun createFromParcel(source: Parcel): PostItem {
@@ -23,6 +24,7 @@ data class PostItem(val id: Int, val title: String, val body: String, val author
     parcel.writeString(body)
     parcel.writeString(author)
     parcel.writeInt(numOfComments)
+    parcel.writeInt(avatarColor)
   }
 
   override fun describeContents(): Int {
