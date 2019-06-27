@@ -8,10 +8,7 @@ import dagger.Provides
 class ListViewFragmentModule {
 
   @Provides
-  fun provideHomeView(fragment: ListViewFragment): IListView = fragment
-
-  @Provides
-  fun provideRequestInterface() : IRequestService = IRequestService.create()
+  fun provideListView(fragment: ListViewFragment): IListView = fragment
 
   @Provides
   fun provideListViewPresenter(fragment: ListViewFragment, requestService: IRequestService) : IListPresenter =
