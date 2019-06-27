@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Mini Social Media</string>
-    <string name="comments">Comments: %d</string>
+    <string name="number_of_comments">%d Comments</string>
+    <string name="post_key">POST</string>
 </resources>
