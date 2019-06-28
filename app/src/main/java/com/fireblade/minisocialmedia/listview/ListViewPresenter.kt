@@ -1,6 +1,7 @@
 package com.fireblade.minisocialmedia.listview
 
 import android.annotation.SuppressLint
+import com.fireblade.minisocialmedia.core.Colorizer
 import com.fireblade.minisocialmedia.model.Comment
 import com.fireblade.minisocialmedia.model.Post
 import com.fireblade.minisocialmedia.model.User
@@ -39,7 +40,8 @@ class ListViewPresenter @Inject constructor(
         post.title,
         post.body,
         userList.find { user -> user.id == post.userId }?.name ?: "Unknown User",
-        commentList.count { comment -> comment.postId == post.id }
+        commentList.count { comment -> comment.postId == post.id },
+        Colorizer.generateColor()
       )
     }
   }
