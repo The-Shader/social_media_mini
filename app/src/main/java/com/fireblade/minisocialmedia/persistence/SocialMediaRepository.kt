@@ -16,54 +16,74 @@ class SocialMediaRepository @Inject constructor(
 
   fun syncUsers(): Flowable<List<User>> {
 
-    return placeholderApiService.getUsers()
-      .map { it.map(NetworkUser::toDatabaseUser) }
+    return Flowable.concat(
+      userModule.getUsersMaybe().map {
+        it.map(DatabaseUser::toModel)
+      }.toFlowable(),
+    placeholderApiService.getUsers()
+      .map {
+        it.map(NetworkUser::toDatabaseUser) }
       .flatMapCompletable(userModule::insertUsers)
       .onErrorComplete()
       .toFlowable()
+    ).distinctUntilChanged()
   }
 
   fun getUsers(): Flowable<List<User>> {
 
     return Flowable.concat(
+      syncUsers(),
       userModule.getUsers().map {
       it.map(DatabaseUser::toModel)
-    }, syncUsers())
-      .distinctUntilChanged()
+    })
   }
 
   fun syncPosts(): Flowable<List<Post>> {
 
-    return placeholderApiService.getPosts().map { it.map(NetworkPost::toDatabasePost) }
+    return Flowable.concat(
+      postModule.getPostsMaybe().map {
+        it.map(DatabasePost::toModel)
+      }.toFlowable(),
+      placeholderApiService.getPosts().map { it.map(NetworkPost::toDatabasePost) }
       .flatMapCompletable(postModule::insertPosts)
       .onErrorComplete()
       .toFlowable()
+    )
+      .distinctUntilChanged()
   }
 
   fun getPosts(): Flowable<List<Post>> {
 
     return Flowable.concat(
+      syncPosts(),
       postModule.getPosts().map {
         it.map(DatabasePost::toModel)
-      }, syncPosts()
+      }
     )
       .distinctUntilChanged()
   }
 
   fun syncComments(): Flowable<List<Comment>> {
 
-    return placeholderApiService.getComments().map { it.map(NetworkComment::toDatabaseComment) }
+    return Flowable.concat(
+      commentModule.getCommentsMaybe().map {
+        it.map(DatabaseComment::toModel)
+      }.toFlowable(),
+      placeholderApiService.getComments().map { it.map(NetworkComment::toDatabaseComment) }
       .flatMapCompletable(commentModule::insertComments)
       .onErrorComplete()
       .toFlowable()
+    )
+      .distinctUntilChanged()
   }
 
   fun getComments(): Flowable<List<Comment>> {
 
     return Flowable.concat(
+      syncComments(),
       commentModule.getComments().map {
         it.map(DatabaseComment::toModel)
-      }, syncComments()
+      }
     )
       .distinctUntilChanged()
   }
