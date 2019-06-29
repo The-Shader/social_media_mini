@@ -3,8 +3,8 @@ package com.fireblade.minisocialmedia.home
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import com.fireblade.feed.FeedFragment
 import com.fireblade.minisocialmedia.R
-import com.fireblade.minisocialmedia.listview.ListViewFragment
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector, IHomeView 
     setContentView(R.layout.activity_home)
 
     supportFragmentManager.beginTransaction().apply {
-      replace(R.id.post_layout, ListViewFragment())
+      replace(R.id.post_layout, FeedFragment())
     }.commitAllowingStateLoss()
   }
 }
