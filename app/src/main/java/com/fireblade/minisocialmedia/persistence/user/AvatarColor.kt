@@ -1,9 +1,9 @@
-package com.fireblade.minisocialmedia.core
+package com.fireblade.minisocialmedia.persistence.user
 
 import android.graphics.Color
 import kotlin.random.Random
 
-class Colorizer {
+class AvatarColor {
 
   companion object {
 
