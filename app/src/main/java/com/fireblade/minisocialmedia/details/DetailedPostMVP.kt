@@ -1,17 +1,15 @@
-package com.fireblade.minisocialmedia.comments
+package com.fireblade.minisocialmedia.details
 
 import com.fireblade.minisocialmedia.listview.PostItem
 
-interface ICommentView {
+interface IDetailedPostView {
 
   fun setComments(comments: List<CommentItem>)
 
   fun handleError(error: Throwable)
 }
 
-interface ICommentPresenter {
-
-  fun fetchComments()
+interface IDetailedPostPresenter {
 
   fun loadCommentsForPost(postItem: PostItem)
 
