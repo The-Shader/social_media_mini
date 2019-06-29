@@ -1,17 +1,18 @@
-package com.fireblade.minisocialmedia.listview
+package com.fireblade.feed.post
 
 import android.content.Intent
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.fireblade.minisocialmedia.R
-import com.fireblade.minisocialmedia.persistence.user.AvatarColor
-import com.fireblade.minisocialmedia.details.DetailedPostActivity
+import com.fireblade.core.post.PostItem
+import com.fireblade.detail.DetailedPostActivity
+import com.fireblade.feed.R
+import com.fireblade.persistence.user.AvatarColor
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.post_list_item.view.*
 
 class PostViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
 
-  lateinit var postItem: PostItem
+  private lateinit var postItem: PostItem
 
   init {
     itemView.setOnClickListener(this)

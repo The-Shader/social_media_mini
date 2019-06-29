@@ -18,7 +18,7 @@
             app:layout_constraintHorizontal_bias="0">
 
         <TextView android:id="@+id/author_textview"
-                  android:text="Full Name"
+                  android:text="@string/full_name"
                   app:layout_constraintStart_toStartOf="parent"
                   app:layout_constraintEnd_toEndOf="parent"
                   app:layout_constraintTop_toTopOf="parent"
@@ -35,6 +35,7 @@
         <ImageView android:id="@+id/user_avatar"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
+                   android:contentDescription="@string/user_avatar"
                    android:minWidth="100dp"
                    android:minHeight="100dp"
                    android:maxWidth="150dp"
@@ -51,7 +52,7 @@
 
 
     <TextView android:id="@+id/title_textview"
-              android:text="Title"
+              android:text="@string/title"
               app:layout_constraintStart_toEndOf="@id/user_layout"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintTop_toTopOf="parent"
@@ -66,7 +67,7 @@
               android:layout_height="wrap_content"/>
 
     <TextView android:id="@+id/body_textview"
-              android:text="Content"
+              android:text="@string/content"
               app:layout_constraintStart_toEndOf="@id/user_layout"
               app:layout_constraintEnd_toEndOf="parent"
               app:layout_constraintTop_toBottomOf="@+id/title_textview"

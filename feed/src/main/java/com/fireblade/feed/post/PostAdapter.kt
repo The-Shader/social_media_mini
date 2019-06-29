@@ -1,9 +1,10 @@
-package com.fireblade.minisocialmedia.listview
+package com.fireblade.feed.post
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.fireblade.minisocialmedia.R
+import com.fireblade.core.post.PostItem
+import com.fireblade.feed.R
 
 class PostAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

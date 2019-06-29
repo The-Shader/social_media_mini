@@ -1,13 +1,15 @@
-package com.fireblade.minisocialmedia.listview
+package com.fireblade.feed
 
-interface IListView {
+import com.fireblade.core.post.PostItem
+
+interface IFeedView {
 
   fun setPostItems(postItems: List<PostItem>)
 
   fun handleError(error: Throwable)
 }
 
-interface IListPresenter {
+interface IFeedPresenter {
 
   fun loadPostItems()
 

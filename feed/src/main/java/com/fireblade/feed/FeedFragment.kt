@@ -1,4 +1,4 @@
-package com.fireblade.minisocialmedia.listview
+package com.fireblade.feed
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.fireblade.minisocialmedia.R
+import com.fireblade.feed.post.PostAdapter
+import com.fireblade.core.post.PostItem
 import dagger.android.support.AndroidSupportInjection
-import kotlinx.android.synthetic.main.fragment_list_view.*
+import kotlinx.android.synthetic.main.fragment_feed.*
 import javax.inject.Inject
 
-class ListViewFragment : Fragment(), IListView {
+class FeedFragment : Fragment(), IFeedView {
 
   private val postAdapter: PostAdapter by lazy { PostAdapter() }
 
   @Inject
-  lateinit var presenter: IListPresenter
+  lateinit var presenter: IFeedPresenter
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidSupportInjection.inject(this)
@@ -25,7 +26,7 @@ class ListViewFragment : Fragment(), IListView {
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-    return inflater.inflate(R.layout.fragment_list_view, container, false)
+    return inflater.inflate(R.layout.fragment_feed, container, false)
   }
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
