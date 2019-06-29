@@ -9,5 +9,7 @@ class CommentModule @Inject constructor(private val commentDAO: CommentDAO) {
 
   fun getComments() = commentDAO.getAllComments().subscribeOn(Schedulers.io())
 
+  fun getCommentsMaybe() = commentDAO.getAllCommentsMaybe().subscribeOn(Schedulers.io())
+
   fun getCommentsByPost(postId: Int) = commentDAO.getCommentsByPost(postId).subscribeOn(Schedulers.io())
 }

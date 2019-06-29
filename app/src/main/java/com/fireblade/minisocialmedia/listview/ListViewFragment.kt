@@ -42,11 +42,16 @@ class ListViewFragment : Fragment(), IListView {
     presenter.loadPostItems()
   }
 
+  override fun onStop() {
+    presenter.destroy()
+    super.onStop()
+  }
+
   override fun setPostItems(postItems: List<PostItem>) {
     postAdapter.items = postItems
   }
 
   override fun handleError(error: Throwable) {
-    Toast.makeText(context, "An error occurred while loading data from the network. Check your internet connection.", Toast.LENGTH_SHORT).show()
+    Toast.makeText(context, getString(R.string.connection_error), Toast.LENGTH_SHORT).show()
   }
 }
