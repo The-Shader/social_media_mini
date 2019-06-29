@@ -35,7 +35,9 @@ class ListViewPresenter @Inject constructor(
       .observeOn(AndroidSchedulers.mainThread())
       .subscribeOn(Schedulers.io())
       .subscribe(view::setPostItems, view::handleError)
-      .apply { subscribers.add(this) }
+      .apply {
+        subscribers.add(this)
+      }
   }
 
   override fun destroy() {
