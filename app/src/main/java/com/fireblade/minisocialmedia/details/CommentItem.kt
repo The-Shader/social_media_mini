@@ -1,4 +1,4 @@
-package com.fireblade.minisocialmedia.comments
+package com.fireblade.minisocialmedia.details
 
 import com.fireblade.minisocialmedia.persistence.comment.Comment
 
