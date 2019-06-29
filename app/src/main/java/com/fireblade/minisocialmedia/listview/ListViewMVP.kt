@@ -10,4 +10,6 @@ interface IListView {
 interface IListPresenter {
 
   fun loadPostItems()
+
+  fun destroy()
 }

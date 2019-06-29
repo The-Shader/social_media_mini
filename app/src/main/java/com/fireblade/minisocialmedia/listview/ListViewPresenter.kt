@@ -1,47 +1,59 @@
 package com.fireblade.minisocialmedia.listview
 
 import android.annotation.SuppressLint
-import com.fireblade.minisocialmedia.core.Colorizer
-import com.fireblade.minisocialmedia.model.Comment
-import com.fireblade.minisocialmedia.model.Post
-import com.fireblade.minisocialmedia.model.User
-import com.fireblade.minisocialmedia.network.IPlaceholderApiService
-import io.reactivex.Observable
-import io.reactivex.functions.Function3
+import com.fireblade.minisocialmedia.persistence.user.AvatarColor
+import com.fireblade.minisocialmedia.persistence.SocialMediaRepository
+import com.fireblade.minisocialmedia.persistence.comment.Comment
+import com.fireblade.minisocialmedia.persistence.post.Post
+import com.fireblade.minisocialmedia.persistence.user.User
+import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.functions.Function3
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class ListViewPresenter @Inject constructor(
   private val view: IListView,
-  private val placeholderApiService: IPlaceholderApiService
+  private val socialMediaRepository: SocialMediaRepository
 ) : IListPresenter {
+
+  private val subscribers = CompositeDisposable()
 
   @SuppressLint("CheckResult")
   override fun loadPostItems() {
-    val observablePosts = placeholderApiService.getPosts().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
 
-    val observableUsers = placeholderApiService.getUsers().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+    val users = socialMediaRepository.getUsers().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+    val posts = socialMediaRepository.getPosts().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+    val comments = socialMediaRepository.getComments().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
 
-    val observableComments = placeholderApiService.getComments().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
-
-    Observable.zip(observableUsers, observablePosts, observableComments,
+    Flowable.zip(users, posts, comments,
       Function3<List<User>, List<Post>, List<Comment>, List<PostItem>> { userList, postList, commentList ->
         return@Function3 createPostItems(userList, postList, commentList)
-      })
-      .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(view::setPostItems, view::handleError)
+      }
+    )
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribeOn(Schedulers.io())
+      .subscribe(view::setPostItems, view::handleError)
+      .apply { subscribers.add(this) }
   }
 
-  private fun createPostItems(userList: List<User>, postList: List<Post>, commentList: List<Comment>) : List<PostItem> {
+  override fun destroy() {
+    subscribers.clear()
+  }
 
-    return postList.map { post ->
+  private fun createPostItems(users: List<User>, posts: List<Post>, comments: List<Comment>) : List<PostItem> {
+
+    return posts.map { post ->
+
+      val user = users.find { user -> user.id == post.userId }
       PostItem(
-        post.id,
+        post.postId,
         post.title,
         post.body,
-        userList.find { user -> user.id == post.userId }?.name ?: "Unknown User",
-        commentList.count { comment -> comment.postId == post.id },
-        Colorizer.generateColor()
+        user?.name ?: "Unknown NetworkUser",
+        comments.count { comment -> comment.postId == post.postId },
+        user?.avatarColor ?: AvatarColor.generateColor()
       )
     }
   }
