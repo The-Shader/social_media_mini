@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import com.fireblade.minisocialmedia.R
 import com.fireblade.minisocialmedia.comments.CommentViewFragment
 import com.fireblade.minisocialmedia.comments.ICommentEvents
+import com.fireblade.minisocialmedia.core.Colorizer
 import com.fireblade.minisocialmedia.listview.PostItem
+import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -44,5 +46,8 @@ class DetailedPostActivity : AppCompatActivity(), HasSupportFragmentInjector, IC
     body_textview.text = postItem.body
     title_textview.text = postItem.title
     num_of_comments_textview.text = resources.getString(R.string.number_of_comments, postItem.numOfComments)
+    user_avatar.setColorFilter(postItem.avatarColor)
+    user_avatar.setBackgroundColor(Colorizer.generateBackgroundColor(postItem.avatarColor))
+    Picasso.get().load(R.drawable.ic_user_avatar).placeholder(R.drawable.ic_user_avatar_placeholder).fit().centerCrop().into(user_avatar)
   }
 }
