@@ -1,9 +1,9 @@
-package com.fireblade.minisocialmedia.details
+package com.fireblade.core.comment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.fireblade.minisocialmedia.R
+import com.fireblade.core.R
 
 class CommentAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

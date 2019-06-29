@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Core</string>
+    <string name="number_of_comments">%d Comments</string>
+    <string name="post_key">POST</string>
+    <string name="connection_error">An error occurred while loading data from the network. Check your internet
+        connection.
+    </string>
+</resources>

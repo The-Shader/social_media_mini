@@ -1,4 +1,4 @@
-package com.fireblade.minisocialmedia.listview
+package com.fireblade.core.post
 
 import android.graphics.Color
 import android.os.Parcel

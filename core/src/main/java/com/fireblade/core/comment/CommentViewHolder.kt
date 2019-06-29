@@ -1,8 +1,7 @@
-package com.fireblade.minisocialmedia.details
+package com.fireblade.core.comment
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.fireblade.minisocialmedia.details.CommentItem
 import kotlinx.android.synthetic.main.comment_list_item.view.*
 
 class CommentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
