@@ -6,7 +6,7 @@ import com.fireblade.minisocialmedia.model.User
 import io.reactivex.Observable
 import retrofit2.http.GET
 
-interface IRequestService {
+interface IPlaceholderApiService {
 
   @GET("/posts")
   fun getPosts() : Observable<List<Post>>
@@ -19,8 +19,8 @@ interface IRequestService {
 
   companion object Factory {
 
-    fun create() : IRequestService {
-      return RequestClient.getClient().create(IRequestService::class.java)
+    fun create(placeholderApiSdk: PlaceholderApiSdk) : IPlaceholderApiService {
+      return placeholderApiSdk.getClient().create(IPlaceholderApiService::class.java)
     }
   }
 }

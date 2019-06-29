@@ -5,7 +5,7 @@ import com.fireblade.minisocialmedia.core.Colorizer
 import com.fireblade.minisocialmedia.model.Comment
 import com.fireblade.minisocialmedia.model.Post
 import com.fireblade.minisocialmedia.model.User
-import com.fireblade.minisocialmedia.network.IRequestService
+import com.fireblade.minisocialmedia.network.IPlaceholderApiService
 import io.reactivex.Observable
 import io.reactivex.functions.Function3
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,16 +14,16 @@ import javax.inject.Inject
 
 class ListViewPresenter @Inject constructor(
   private val view: IListView,
-  private val requestService: IRequestService
+  private val placeholderApiService: IPlaceholderApiService
 ) : IListPresenter {
 
   @SuppressLint("CheckResult")
   override fun loadPostItems() {
-    val observablePosts = requestService.getPosts().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+    val observablePosts = placeholderApiService.getPosts().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
 
-    val observableUsers = requestService.getUsers().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+    val observableUsers = placeholderApiService.getUsers().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
 
-    val observableComments = requestService.getComments().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+    val observableComments = placeholderApiService.getComments().observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
 
     Observable.zip(observableUsers, observablePosts, observableComments,
       Function3<List<User>, List<Post>, List<Comment>, List<PostItem>> { userList, postList, commentList ->

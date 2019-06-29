@@ -1,6 +1,6 @@
 package com.fireblade.minisocialmedia.listview
 
-import com.fireblade.minisocialmedia.network.IRequestService
+import com.fireblade.minisocialmedia.network.IPlaceholderApiService
 import dagger.Module
 import dagger.Provides
 
@@ -11,6 +11,6 @@ class ListViewFragmentModule {
   fun provideListView(fragment: ListViewFragment): IListView = fragment
 
   @Provides
-  fun provideListViewPresenter(fragment: ListViewFragment, requestService: IRequestService) : IListPresenter =
-    ListViewPresenter(fragment, requestService)
+  fun provideListViewPresenter(fragment: ListViewFragment, placeholderApiService: IPlaceholderApiService) : IListPresenter =
+    ListViewPresenter(fragment, placeholderApiService)
 }
