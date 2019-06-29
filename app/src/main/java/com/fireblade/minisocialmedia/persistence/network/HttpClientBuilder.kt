@@ -1,4 +1,4 @@
-package com.fireblade.minisocialmedia.network
+package com.fireblade.minisocialmedia.persistence.network
 
 import android.content.Context
 import android.net.ConnectivityManager

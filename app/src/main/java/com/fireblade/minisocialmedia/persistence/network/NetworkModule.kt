@@ -1,4 +1,4 @@
-package com.fireblade.minisocialmedia.network
+package com.fireblade.minisocialmedia.persistence.network
 
 import android.content.Context
 import dagger.Module
@@ -11,14 +11,22 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NetworkModule {
 
   @Provides
-  fun provideRequestService(placeholderApiSdk: PlaceholderApiSdk) : IPlaceholderApiService = IPlaceholderApiService.create(placeholderApiSdk)
+  fun provideRequestService(placeholderApiSdk: PlaceholderApiSdk) : IPlaceholderApiService =
+    IPlaceholderApiService.create(placeholderApiSdk)
 
   @Provides
   fun provideRequestClient(httpClient: OkHttpClient, rxJava2CallAdapterFactory: RxJava2CallAdapterFactory, gsonConverterFactory: GsonConverterFactory) =
-    PlaceholderApiSdk(httpClient, rxJava2CallAdapterFactory, gsonConverterFactory)
+    PlaceholderApiSdk(
+      httpClient,
+      rxJava2CallAdapterFactory,
+      gsonConverterFactory
+    )
 
   @Provides
-  fun provideOkHttpClient(context: Context) = HttpClientBuilder(context).build()
+  fun provideOkHttpClient(context: Context) =
+    HttpClientBuilder(
+      context
+    ).build()
 
   @Provides
   fun provideRxJava2CallAdapterFactory(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
