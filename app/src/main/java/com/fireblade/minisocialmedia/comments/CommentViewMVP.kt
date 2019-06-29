@@ -14,4 +14,6 @@ interface ICommentPresenter {
   fun fetchComments()
 
   fun loadCommentsForPost(postItem: PostItem)
+
+  fun destroy()
 }
