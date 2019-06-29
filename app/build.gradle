@@ -16,6 +16,12 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -26,6 +32,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':persistence')
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
@@ -52,7 +60,7 @@ dependencies {
     api "com.jakewharton.rxbinding2:rxbinding-kotlin:${project.rxbinding_version}"
 
     // support
-    implementation 'androidx.core:core-ktx:1.2.0-alpha01'
+    implementation 'androidx.core:core-ktx:1.2.0-alpha02'
     api "androidx.appcompat:appcompat:${project.appcompat_version}"
     api "androidx.constraintlayout:constraintlayout:${project.constraint_version}"
     api "com.google.android.material:material:${project.design_version}"
