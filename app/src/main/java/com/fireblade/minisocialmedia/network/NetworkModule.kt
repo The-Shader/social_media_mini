@@ -11,11 +11,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NetworkModule {
 
   @Provides
-  fun provideRequestService(requestClient: RequestClient) : IRequestService = IRequestService.create(requestClient)
+  fun provideRequestService(placeholderApiSdk: PlaceholderApiSdk) : IPlaceholderApiService = IPlaceholderApiService.create(placeholderApiSdk)
 
   @Provides
   fun provideRequestClient(httpClient: OkHttpClient, rxJava2CallAdapterFactory: RxJava2CallAdapterFactory, gsonConverterFactory: GsonConverterFactory) =
-    RequestClient(httpClient, rxJava2CallAdapterFactory, gsonConverterFactory)
+    PlaceholderApiSdk(httpClient, rxJava2CallAdapterFactory, gsonConverterFactory)
 
   @Provides
   fun provideOkHttpClient(context: Context) = HttpClientBuilder(context).build()

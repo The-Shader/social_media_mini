@@ -1,6 +1,6 @@
 package com.fireblade.minisocialmedia.comments
 
-import com.fireblade.minisocialmedia.network.IRequestService
+import com.fireblade.minisocialmedia.network.IPlaceholderApiService
 import dagger.Module
 import dagger.Provides
 
@@ -14,6 +14,6 @@ class CommentViewFragmentModule {
   fun provideSettingsEventHandler(fragment: CommentViewFragment) : ICommentEvents = fragment.activity as ICommentEvents
 
   @Provides
-  fun provideCommentPresenter(fragment: CommentViewFragment, requestService: IRequestService, events: ICommentEvents): ICommentPresenter =
+  fun provideCommentPresenter(fragment: CommentViewFragment, requestService: IPlaceholderApiService, events: ICommentEvents): ICommentPresenter =
       CommentPresenter(fragment, requestService, events)
 }

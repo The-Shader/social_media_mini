@@ -6,9 +6,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Inject
 
-class RequestClient @Inject constructor(private val httpClient: OkHttpClient,
-                                        private val rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
-                                        private val gsonConverterFactory: GsonConverterFactory) {
+class PlaceholderApiSdk @Inject constructor(private val httpClient: OkHttpClient,
+                                            private val rxJava2CallAdapterFactory: RxJava2CallAdapterFactory,
+                                            private val gsonConverterFactory: GsonConverterFactory) {
 
   private val retrofit by lazy {
 
