@@ -43,6 +43,11 @@ class CommentViewFragment : Fragment(), ICommentView {
     presenter.fetchComments()
   }
 
+  override fun onStop() {
+    presenter.destroy()
+    super.onStop()
+  }
+
   override fun setComments(comments: List<CommentItem>) {
     commentsAdapter.items = comments
   }
