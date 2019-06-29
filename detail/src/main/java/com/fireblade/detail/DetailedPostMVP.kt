@@ -1,6 +1,7 @@
-package com.fireblade.minisocialmedia.details
+package com.fireblade.detail
 
-import com.fireblade.minisocialmedia.listview.PostItem
+import com.fireblade.core.comment.CommentItem
+import com.fireblade.core.post.PostItem
 
 interface IDetailedPostView {
 

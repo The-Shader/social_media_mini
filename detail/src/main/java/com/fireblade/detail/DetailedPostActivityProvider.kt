@@ -1,6 +1,6 @@
-package com.fireblade.minisocialmedia.details
+package com.fireblade.detail
 
-import com.fireblade.minisocialmedia.persistence.PersistenceModule
+import com.fireblade.persistence.PersistenceModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

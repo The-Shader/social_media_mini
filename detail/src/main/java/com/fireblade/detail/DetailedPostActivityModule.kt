@@ -1,6 +1,6 @@
-package com.fireblade.minisocialmedia.details
+package com.fireblade.detail
 
-import com.fireblade.minisocialmedia.persistence.SocialMediaRepository
+import com.fireblade.persistence.SocialMediaRepository
 import dagger.Module
 import dagger.Provides
 
@@ -12,5 +12,5 @@ class DetailedPostActivityModule {
 
   @Provides
   fun provideDetailedPresenter(view: IDetailedPostView, socialMediaRepository: SocialMediaRepository) =
-      DetailedPostPresenter(view, socialMediaRepository)
+    DetailedPostPresenter(view, socialMediaRepository)
 }

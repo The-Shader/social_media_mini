@@ -1,13 +1,14 @@
-package com.fireblade.minisocialmedia.details
+package com.fireblade.detail
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.fireblade.minisocialmedia.R
-import com.fireblade.minisocialmedia.persistence.user.AvatarColor
-import com.fireblade.minisocialmedia.listview.PostItem
+import com.fireblade.core.comment.CommentAdapter
+import com.fireblade.core.comment.CommentItem
+import com.fireblade.core.post.PostItem
+import com.fireblade.persistence.user.AvatarColor
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector

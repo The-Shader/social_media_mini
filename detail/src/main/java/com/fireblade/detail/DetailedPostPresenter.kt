@@ -1,12 +1,18 @@
-package com.fireblade.minisocialmedia.details
+package com.fireblade.detail
 
-import com.fireblade.minisocialmedia.listview.PostItem
-import com.fireblade.minisocialmedia.persistence.SocialMediaRepository
-import com.fireblade.minisocialmedia.persistence.comment.Comment
+import com.fireblade.core.comment.CommentItem
+import com.fireblade.core.post.PostItem
+import com.fireblade.persistence.SocialMediaRepository
+import com.fireblade.persistence.comment.Comment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
+
+fun Comment.toViewItem(): CommentItem =
+  CommentItem(
+    content = body
+  )
 
 class DetailedPostPresenter@Inject constructor(
   private val view: IDetailedPostView,
