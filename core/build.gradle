@@ -38,6 +38,21 @@ dependencies {
     androidTestImplementation "androidx.test:runner:${project.androidx_test_runner_version}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${project.espresso_version}"
 
+    // dagger2
+    api "com.google.dagger:dagger:${project.dagger_version}"
+    api "com.google.dagger:dagger-android:${project.dagger_version}"
+    api "com.google.dagger:dagger-android-support:${project.dagger_version}"
+    kapt "com.google.dagger:dagger-compiler:${project.dagger_version}"
+    kapt "com.google.dagger:dagger-android-processor:${project.dagger_version}"
+
     // support
     api "com.google.android.material:material:${project.design_version}"
+
+    //rxjava2
+    api "io.reactivex.rxjava2:rxjava:${project.rxjava_version}"
+    api "io.reactivex.rxjava2:rxandroid:${project.rxandroid_version}"
+
+    //rxbinding
+    api "com.jakewharton.rxbinding2:rxbinding:${project.rxbinding_version}"
+    api "com.jakewharton.rxbinding2:rxbinding-kotlin:${project.rxbinding_version}"
 }
