@@ -37,7 +37,9 @@ dependencies {
     implementation project(':detail')
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:${project.kotlin_version}"
     testImplementation "org.mockito:mockito-core:${project.mockito_version}"
+    testImplementation "io.mockk:mockk:${project.mockk_version}"
     testImplementation "junit:junit:${project.junit_version}"
+    testImplementation "androidx.test.ext:junit:${project.androidx_test_ext_version}"
     androidTestImplementation "androidx.test.ext:junit:${project.androidx_test_ext_version}"
     androidTestImplementation "androidx.test:runner:${project.androidx_test_runner_version}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${project.espresso_version}"
