@@ -1,5 +1,6 @@
 package com.fireblade.feed
 
+import com.fireblade.core.schedulers.ISchedulers
 import com.fireblade.persistence.SocialMediaRepository
 import dagger.Module
 import dagger.Provides
@@ -11,6 +12,6 @@ class FeedFragmentModule {
   fun provideListView(fragment: FeedFragment): IFeedView = fragment
 
   @Provides
-  fun provideListViewPresenter(fragment: FeedFragment, socialMediaRepository: SocialMediaRepository) : IFeedPresenter =
-    FeedPresenter(fragment, socialMediaRepository)
+  fun provideListViewPresenter(fragment: FeedFragment, socialMediaRepository: SocialMediaRepository, schedulers: ISchedulers) : IFeedPresenter =
+    FeedPresenter(fragment, socialMediaRepository, schedulers)
 }

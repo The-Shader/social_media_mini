@@ -8,5 +8,5 @@ import dagger.android.ContributesAndroidInjector
 @Module
 abstract class FeedFragmentProvider {
   @ContributesAndroidInjector(modules = [FeedFragmentModule::class, PersistenceModule::class, DetailedPostActivityProvider::class])
-  abstract fun bindListViewFragment(): FeedFragment
+  abstract fun bindFeedViewFragment(): FeedFragment
 }

@@ -1,5 +1,6 @@
 package com.fireblade.detail
 
+import com.fireblade.core.schedulers.ISchedulers
 import com.fireblade.persistence.SocialMediaRepository
 import dagger.Module
 import dagger.Provides
@@ -11,6 +12,6 @@ class DetailedPostActivityModule {
   fun provideDetailedPostView(activity: DetailedPostActivity) : IDetailedPostView = activity
 
   @Provides
-  fun provideDetailedPresenter(view: IDetailedPostView, socialMediaRepository: SocialMediaRepository) =
-    DetailedPostPresenter(view, socialMediaRepository)
+  fun provideDetailedPresenter(view: IDetailedPostView, socialMediaRepository: SocialMediaRepository, schedulers: ISchedulers) =
+    DetailedPostPresenter(view, socialMediaRepository, schedulers)
 }
