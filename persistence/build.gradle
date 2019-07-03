@@ -30,6 +30,9 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    
+    implementation project(':core')
+
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:${project.kotlin_version}"
     testImplementation "org.mockito:mockito-core:${project.mockito_version}"
     testImplementation "junit:junit:${project.junit_version}"

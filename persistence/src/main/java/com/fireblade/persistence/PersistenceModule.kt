@@ -1,6 +1,8 @@
 package com.fireblade.persistence
 
 import android.content.Context
+import com.fireblade.core.schedulers.ApplicationSchedulersModule
+import com.fireblade.core.schedulers.ISchedulers
 import com.fireblade.persistence.network.IPlaceholderApiService
 import com.fireblade.persistence.network.NetworkModule
 import com.fireblade.persistence.comment.CommentDAO
@@ -12,7 +14,7 @@ import com.fireblade.persistence.user.UserModule
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = [NetworkModule::class])
+@Module(includes = [NetworkModule::class, ApplicationSchedulersModule::class])
 class PersistenceModule {
 
   @Provides
@@ -23,19 +25,19 @@ class PersistenceModule {
   fun provideUserDAO(socialMediaDatabase: SocialMediaDatabase): UserDAO = socialMediaDatabase.userDao()
 
   @Provides
-  fun provideUserModule(userDAO: UserDAO): UserModule = UserModule(userDAO)
+  fun provideUserModule(userDAO: UserDAO, schedulers: ISchedulers): UserModule = UserModule(userDAO, schedulers)
 
   @Provides
   fun providePostDAO(socialMediaDatabase: SocialMediaDatabase): PostDAO = socialMediaDatabase.postDao()
 
   @Provides
-  fun providePostModule(postDAO: PostDAO): PostModule = PostModule(postDAO)
+  fun providePostModule(postDAO: PostDAO, schedulers: ISchedulers): PostModule = PostModule(postDAO, schedulers)
 
   @Provides
   fun provideCommentDAO(socialMediaDatabase: SocialMediaDatabase): CommentDAO = socialMediaDatabase.commentDao()
 
   @Provides
-  fun provideCommentModule(commentDAO: CommentDAO): CommentModule = CommentModule(commentDAO)
+  fun provideCommentModule(commentDAO: CommentDAO, schedulers: ISchedulers): CommentModule = CommentModule(commentDAO, schedulers)
 
   @Provides
   fun provideRepository(placeholderApiService: IPlaceholderApiService, userModule: UserModule, postModule: PostModule, commentModule: CommentModule): SocialMediaRepository =
