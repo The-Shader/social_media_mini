@@ -16,6 +16,8 @@ The following features and techniques have been implemented/used:
 
 Missing/can be improved:
 * Much more unittests and UI tests
+* Bitrise integration for continuous integration and automatic deploy into the Play store
+* Firebase integration for crash and user analytics
 * Visitor pattern for the RecyclerViews -> moving the PostViewHolder and PostAdapter to the core module similarly to the comments once it doesn't depend on the details module
 * More modern architecture for better responsibility separation and scalability: MVVM, MVI
 * Navigation component for handling transitions between screens/activities
