@@ -61,6 +61,10 @@ dependencies {
     api "androidx.constraintlayout:constraintlayout:${project.constraint_version}"
     api "com.google.android.material:material:${project.design_version}"
 
+    // groupie
+    implementation "com.xwray:groupie:${project.groupie_version}"
+    implementation "com.xwray:groupie-kotlin-android-extensions:${project.groupie_version}"
+
     // picasso
     implementation "com.squareup.picasso:picasso:${project.picasso_version}"
 }
