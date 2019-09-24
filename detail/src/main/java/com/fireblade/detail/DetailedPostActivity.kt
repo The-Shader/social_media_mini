@@ -5,11 +5,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.fireblade.core.comment.CommentAdapter
 import com.fireblade.core.comment.CommentItem
 import com.fireblade.core.post.PostItem
 import com.fireblade.persistence.user.AvatarColor
 import com.squareup.picasso.Picasso
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -19,7 +20,7 @@ import javax.inject.Inject
 
 class DetailedPostActivity : AppCompatActivity(), HasSupportFragmentInjector, IDetailedPostView {
 
-  private val commentsAdapter: CommentAdapter by lazy { CommentAdapter() }
+  private val commentsAdapter: GroupAdapter<ViewHolder> by lazy { GroupAdapter<ViewHolder>() }
 
   @Inject
   lateinit var presenter: DetailedPostPresenter
@@ -43,7 +44,7 @@ class DetailedPostActivity : AppCompatActivity(), HasSupportFragmentInjector, ID
 
   override fun onStart() {
     super.onStart()
-    val post: PostItem = intent.getParcelableExtra(resources.getString(R.string.post_key))
+    val post: PostItem = intent.getParcelableExtra(resources.getString(R.string.post_key)) ?: PostItem(-1, "", "", "")
     setPostDetails(post)
     presenter.loadCommentsForPost(post)
   }
@@ -65,7 +66,11 @@ class DetailedPostActivity : AppCompatActivity(), HasSupportFragmentInjector, ID
 
   override fun setComments(comments: List<CommentItem>) {
 
-    commentsAdapter.items = comments
+    commentsAdapter.addAll(
+      comments.map {
+        CommentViewItem(it)
+      }.toList()
+    )
   }
 
   override fun handleError(error: Throwable) {

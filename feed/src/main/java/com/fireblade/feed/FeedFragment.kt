@@ -7,15 +7,17 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.fireblade.feed.post.PostAdapter
 import com.fireblade.core.post.PostItem
+import com.fireblade.feed.post.PostViewItem
+import com.xwray.groupie.GroupAdapter
+import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_feed.*
 import javax.inject.Inject
 
 class FeedFragment : Fragment(), IFeedView {
 
-  private val postAdapter: PostAdapter by lazy { PostAdapter() }
+  private val postAdapter: GroupAdapter<ViewHolder> by lazy { GroupAdapter<ViewHolder>() }
 
   @Inject
   lateinit var presenter: IFeedPresenter
@@ -49,7 +51,11 @@ class FeedFragment : Fragment(), IFeedView {
   }
 
   override fun setPostItems(postItems: List<PostItem>) {
-    postAdapter.items = postItems
+
+    postAdapter.addAll(postItems.map {
+      PostViewItem(it)
+    }.toList())
+
   }
 
   override fun handleError(error: Throwable) {
