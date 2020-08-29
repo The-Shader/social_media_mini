@@ -10,14 +10,14 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.fireblade.core.post.PostItem
 import com.fireblade.feed.post.PostViewItem
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_feed.*
 import javax.inject.Inject
 
 class FeedFragment : Fragment(), IFeedView {
 
-  private val postAdapter: GroupAdapter<ViewHolder> by lazy { GroupAdapter<ViewHolder>() }
+  private val postAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter<GroupieViewHolder>() }
 
   @Inject
   lateinit var presenter: IFeedPresenter
