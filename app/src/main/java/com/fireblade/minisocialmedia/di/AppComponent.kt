@@ -6,24 +6,22 @@ import com.fireblade.minisocialmedia.MiniSocialMediaApplication
 import com.fireblade.detail.DetailedPostActivityProvider
 import dagger.BindsInstance
 import dagger.Component
-import dagger.android.support.AndroidSupportInjectionModule
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
 @Singleton
 @Component(modules =
-[AndroidSupportInjectionModule::class,
+[AndroidInjectionModule::class,
   ApplicationModule::class,
   HomeActivityProvider::class,
   DetailedPostActivityProvider::class])
-interface AppComponent {
+interface AppComponent : AndroidInjector<MiniSocialMediaApplication> {
 
-  fun inject(app: MiniSocialMediaApplication)
-
-  @Component.Builder
-  interface Builder {
-    @BindsInstance
-    fun application(application: Application): Builder
-
-    fun build(): AppComponent
+  @Component.Factory
+  interface Factory {
+    fun create(@BindsInstance application: Application): AppComponent
   }
+
+  override fun inject(app: MiniSocialMediaApplication)
 }

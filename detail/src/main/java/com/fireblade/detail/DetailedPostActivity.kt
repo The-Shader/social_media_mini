@@ -3,32 +3,30 @@ package com.fireblade.detail
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.fireblade.core.comment.CommentItem
 import com.fireblade.core.post.PostItem
 import com.fireblade.persistence.user.AvatarColor
 import com.squareup.picasso.Picasso
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
 import kotlinx.android.synthetic.main.activity_details.*
 import javax.inject.Inject
 
-class DetailedPostActivity : AppCompatActivity(), HasSupportFragmentInjector, IDetailedPostView {
+class DetailedPostActivity : AppCompatActivity(), HasAndroidInjector, IDetailedPostView {
 
-  private val commentsAdapter: GroupAdapter<ViewHolder> by lazy { GroupAdapter<ViewHolder>() }
+  private val commentsAdapter: GroupAdapter<GroupieViewHolder> by lazy { GroupAdapter<GroupieViewHolder>() }
 
   @Inject
   lateinit var presenter: DetailedPostPresenter
 
   @Inject
-  lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+  lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-  override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
+  override fun androidInjector(): DispatchingAndroidInjector<Any> = androidInjector
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)

@@ -1,27 +1,24 @@
 package com.fireblade.minisocialmedia
 
-import android.app.Activity
 import android.app.Application
 import com.fireblade.minisocialmedia.di.DaggerAppComponent
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasActivityInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class MiniSocialMediaApplication : Application(), HasActivityInjector {
+class MiniSocialMediaApplication : Application(), HasAndroidInjector {
 
   @Inject
-  lateinit var activityDispatcher: DispatchingAndroidInjector<Activity>
+  lateinit var androidInjector: DispatchingAndroidInjector<Any>
 
-  override fun activityInjector(): AndroidInjector<Activity> = activityDispatcher
+  override fun androidInjector(): DispatchingAndroidInjector<Any> = androidInjector
 
   override fun onCreate() {
     super.onCreate()
 
     DaggerAppComponent
-      .builder()
-      .application(this)
-      .build()
+      .factory()
+      .create(this)
       .inject(this)
   }
 }

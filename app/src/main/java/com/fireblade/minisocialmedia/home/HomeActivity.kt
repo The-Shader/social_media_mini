@@ -2,21 +2,19 @@ package com.fireblade.minisocialmedia.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import com.fireblade.feed.FeedFragment
 import com.fireblade.minisocialmedia.R
 import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
-class HomeActivity : AppCompatActivity(), HasSupportFragmentInjector, IHomeView {
-
-  override fun supportFragmentInjector(): AndroidInjector<Fragment> = fragmentInjector
+class HomeActivity : AppCompatActivity(), HasAndroidInjector, IHomeView {
 
   @Inject
-  lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+  lateinit var androidInjector: DispatchingAndroidInjector<Any>
+
+  override fun androidInjector(): DispatchingAndroidInjector<Any> = androidInjector
 
   override fun onCreate(savedInstanceState: Bundle?) {
     AndroidInjection.inject(this)
