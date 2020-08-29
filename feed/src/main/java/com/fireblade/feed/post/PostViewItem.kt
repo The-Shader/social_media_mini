@@ -7,14 +7,14 @@ import com.fireblade.detail.DetailedPostActivity
 import com.fireblade.feed.R
 import com.fireblade.persistence.user.AvatarColor
 import com.squareup.picasso.Picasso
+import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
-import com.xwray.groupie.kotlinandroidextensions.ViewHolder
 import kotlinx.android.synthetic.main.post_list_item.view.*
 
 class PostViewItem(private val postItem: PostItem): Item(), View.OnClickListener {
     override fun getLayout(): Int = R.layout.post_list_item
 
-    override fun bind(viewHolder: ViewHolder, position: Int) {
+    override fun bind(viewHolder: GroupieViewHolder, position: Int) {
       viewHolder.itemView.title_textview.text = postItem.title
       viewHolder.itemView.body_textview.text = postItem.body
       viewHolder.itemView.author_textview.text = postItem.author
