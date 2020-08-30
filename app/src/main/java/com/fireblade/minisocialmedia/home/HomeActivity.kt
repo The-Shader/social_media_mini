@@ -2,7 +2,7 @@ package com.fireblade.minisocialmedia.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.fireblade.feed.FeedFragment
+import com.fireblade.feed.ui.FeedFragment
 import com.fireblade.minisocialmedia.R
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector

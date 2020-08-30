@@ -1,12 +1,13 @@
-package com.fireblade.feed
+package com.fireblade.feed.di
 
 import com.fireblade.detail.DetailedPostActivityProvider
+import com.fireblade.feed.ui.FeedFragment
 import com.fireblade.persistence.PersistenceModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class FeedFragmentProvider {
-  @ContributesAndroidInjector(modules = [FeedFragmentModule::class, PersistenceModule::class, DetailedPostActivityProvider::class])
+  @ContributesAndroidInjector(modules = [PersistenceModule::class, DetailedPostActivityProvider::class])
   abstract fun bindFeedViewFragment(): FeedFragment
 }
