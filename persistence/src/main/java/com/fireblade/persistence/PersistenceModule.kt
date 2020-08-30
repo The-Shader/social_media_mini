@@ -40,7 +40,7 @@ class PersistenceModule {
   fun provideCommentModule(commentDAO: CommentDAO, schedulers: ISchedulers): CommentModule = CommentModule(commentDAO, schedulers)
 
   @Provides
-  fun provideRepository(placeholderApiService: IPlaceholderApiService, userModule: UserModule, postModule: PostModule, commentModule: CommentModule): SocialMediaRepository =
+  fun provideRepository(placeholderApiService: IPlaceholderApiService, userModule: UserModule, postModule: PostModule, commentModule: CommentModule): ISocialMediaRepository =
     SocialMediaRepository(
       placeholderApiService,
       userModule,
