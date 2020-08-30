@@ -76,4 +76,9 @@ dependencies {
 
     // picasso
     implementation "com.squareup.picasso:picasso:${project.picasso_version}"
+
+    // Orbit2
+    implementation("com.babylon.orbit2:orbit-rxjava2:${project.orbit2_version}")
+    implementation("com.babylon.orbit2:orbit-viewmodel:${project.orbit2_version}")
+    testImplementation("com.babylon.orbit2:orbit-test:${project.orbit2_version}")
 }

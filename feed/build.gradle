@@ -53,6 +53,13 @@ dependencies {
     androidTestImplementation "androidx.test:runner:${project.androidx_test_runner_version}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${project.espresso_version}"
 
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${project.androidx_lifecycle_version}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${project.androidx_lifecycle_version}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:${project.androidx_lifecycle_version}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${project.androidx_lifecycle_version}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${project.androidx_lifecycle_version}"
+
     // dagger2
     api "com.google.dagger:dagger:${project.dagger_version}"
     api "com.google.dagger:dagger-android:${project.dagger_version}"
@@ -80,4 +87,10 @@ dependencies {
 
     // picasso
     implementation "com.squareup.picasso:picasso:${project.picasso_version}"
+
+    // Orbit2
+    implementation("com.babylon.orbit2:orbit-rxjava2:${project.orbit2_version}")
+    implementation("com.babylon.orbit2:orbit-viewmodel:${project.orbit2_version}")
+    implementation("com.babylon.orbit2:orbit-livedata:${project.orbit2_version}")
+    testImplementation("com.babylon.orbit2:orbit-test:${project.orbit2_version}")
 }
