@@ -13,7 +13,7 @@ import com.babylon.orbit2.livedata.sideEffect
 import com.babylon.orbit2.livedata.state
 import com.fireblade.core.model.State
 import com.fireblade.core.post.PostItem
-import com.fireblade.detail.DetailedPostActivity
+import com.fireblade.detail.ui.DetailedPostActivity
 import com.fireblade.feed.R
 import com.fireblade.feed.business.FeedSideEffect
 import com.fireblade.feed.business.FeedViewModel
@@ -44,9 +44,11 @@ class FeedFragment : Fragment() {
     list_of_posts.adapter = postAdapter
 
     list_of_posts.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL).apply {
-
-      ResourcesCompat.getDrawable(resources,
-        R.drawable.divider_item_decoration, null)?.let { decoration ->
+      ResourcesCompat.getDrawable(
+        resources,
+        R.drawable.divider_item_decoration,
+        null
+      )?.let { decoration ->
         setDrawable(decoration)
       }
     })

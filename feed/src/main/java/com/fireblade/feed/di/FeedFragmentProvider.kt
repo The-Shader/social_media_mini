@@ -1,6 +1,6 @@
 package com.fireblade.feed.di
 
-import com.fireblade.detail.DetailedPostActivityProvider
+import com.fireblade.detail.di.DetailedPostActivityProvider
 import com.fireblade.feed.ui.FeedFragment
 import com.fireblade.persistence.PersistenceModule
 import dagger.Module
