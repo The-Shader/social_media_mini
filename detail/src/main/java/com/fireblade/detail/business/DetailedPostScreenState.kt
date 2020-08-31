@@ -8,7 +8,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class DetailedPostScreenState(
-    val feedState: State = State.Loading,
+    val detailState: State = State.Loading,
     val postItem: PostItem = PostItem.empty(),
     val comments: List<CommentItem> = listOf()
 ) : Parcelable

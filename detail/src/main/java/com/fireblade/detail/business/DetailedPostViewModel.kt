@@ -36,7 +36,7 @@ class DetailedPostViewModel @Inject constructor(
         }
             .reduce {
                 state.copy(
-                    feedState = State.Ready,
+                    detailState = State.Ready,
                     comments = event
                 )
             }
