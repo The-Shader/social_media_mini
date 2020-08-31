@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.fireblade.detail.DetailedPostActivity">
+        <activity android:name="com.fireblade.detail.ui.DetailedPostActivity">
         </activity>
     </application>
 

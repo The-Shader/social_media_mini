@@ -1,6 +1,7 @@
-package com.fireblade.detail
+package com.fireblade.detail.ui
 
 import com.fireblade.core.comment.CommentItem
+import com.fireblade.detail.R
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.comment_list_item.view.*
