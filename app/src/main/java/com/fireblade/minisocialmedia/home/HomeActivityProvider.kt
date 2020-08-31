@@ -6,6 +6,6 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 interface HomeActivityProvider {
-  @ContributesAndroidInjector(modules = [HomeActivityModule::class, FeedFragmentProvider::class])
+  @ContributesAndroidInjector(modules = [FeedFragmentProvider::class])
   fun bindHomeActivity(): HomeActivity
 }
