@@ -66,7 +66,7 @@ class FeedFragment : Fragment() {
         is FeedSideEffect.NavigateToDetail -> {
           val appContext = requireContext().applicationContext
           val showPostIntent = Intent(appContext, DetailedPostActivity::class.java)
-          showPostIntent.putExtra(appContext.resources.getString(R.string.post_key), it.item)
+          showPostIntent.putExtra(PostItem.TAG, it.item)
           showPostIntent.flags += Intent.FLAG_ACTIVITY_NEW_TASK
           appContext.startActivity(showPostIntent)
         }

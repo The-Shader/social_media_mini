@@ -59,11 +59,11 @@ class DetailedPostActivity : AppCompatActivity(), HasAndroidInjector {
 
   override fun onStart() {
     super.onStart()
-    val post: PostItem = intent.getParcelableExtra(resources.getString(R.string.post_key)) ?: PostItem.empty()
+    val post: PostItem = intent.getParcelableExtra(PostItem.TAG) ?: PostItem.empty()
     setPostDetails(post)
     viewModel.container.state.observe(this, {
       when (it.detailState) {
-        State.Ready -> setComments(it.comments)
+        State.Ready -> setComments(it.commentItems)
         State.Error -> showErrorState()
         else -> {}
       }

@@ -45,7 +45,12 @@ dependencies {
     implementation project(':persistence')
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:${project.kotlin_version}"
     testImplementation "org.mockito:mockito-core:${project.mockito_version}"
+    testImplementation "org.mockito:mockito-inline:${project.mockito_version}"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:${project.mockito_kotlin_version}"
     testImplementation "junit:junit:${project.junit_version}"
+    //testImplementation 'org.junit.jupiter:junit5-jupiter-starter-gradle-kotlin:5.6.2'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.6.2" //junit5-jupiter-starter-gradle-kotlin
+    testImplementation "com.appmattus.fixture:fixture:0.9.5"
     androidTestImplementation "androidx.test:runner:${project.androidx_test_runner_version}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${project.espresso_version}"
 
