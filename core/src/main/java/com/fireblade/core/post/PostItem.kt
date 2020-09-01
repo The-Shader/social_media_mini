@@ -4,9 +4,24 @@ import android.graphics.Color
 import android.os.Parcel
 import android.os.Parcelable
 
-data class PostItem(val id: Int, val title: String, val body: String, val author: String, val numOfComments: Int = 0, val avatarColor: Int = Color.WHITE) : Parcelable {
+data class PostItem(
+  val id: Int,
+  val title: String,
+  val body: String,
+  val author: String,
+  val numOfComments: Int = 0,
+  val avatarColor: Int = Color.WHITE
+) : Parcelable {
 
-  constructor(parcel: Parcel) : this(parcel.readInt(),parcel.readString() ?: "", parcel.readString()?: "", parcel.readString()?: "", parcel.readInt(), parcel.readInt())
+  constructor(parcel: Parcel) :
+          this(
+            id = parcel.readInt(),
+            title = parcel.readString() ?: "",
+            body = parcel.readString()?: "",
+            author = parcel.readString()?: "",
+            numOfComments = parcel.readInt(),
+            avatarColor = parcel.readInt()
+          )
 
   companion object CREATOR : Parcelable.Creator<PostItem> {
     override fun createFromParcel(source: Parcel): PostItem {
@@ -15,6 +30,11 @@ data class PostItem(val id: Int, val title: String, val body: String, val author
 
     override fun newArray(size: Int): Array<PostItem?> {
       return arrayOfNulls(size)
+    }
+
+    @JvmStatic
+    fun empty() : PostItem {
+      return PostItem(-1, "", "", "")
     }
   }
 

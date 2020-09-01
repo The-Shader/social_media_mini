@@ -46,6 +46,9 @@ dependencies {
     androidTestImplementation "androidx.test:runner:${project.androidx_test_runner_version}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${project.espresso_version}"
 
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:${project.androidx_lifecycle_version}"
+
     // Room components
     implementation "androidx.room:room-runtime:${project.room_version}"
     implementation "androidx.room:room-ktx:${project.room_version}"
@@ -88,4 +91,7 @@ dependencies {
 
     // picasso
     implementation "com.squareup.picasso:picasso:${project.picasso_version}"
+
+    // Orbit2
+    implementation("com.babylon.orbit2:orbit-viewmodel:${project.orbit2_version}")
 }

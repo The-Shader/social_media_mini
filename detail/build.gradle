@@ -66,6 +66,7 @@ dependencies {
 
     // support
     implementation "androidx.core:core-ktx:${project.androidx_core_version}"
+    implementation "androidx.fragment:fragment-ktx:1.2.5"
     api "androidx.appcompat:appcompat:${project.appcompat_version}"
     api "androidx.constraintlayout:constraintlayout:${project.constraint_version}"
     api "com.google.android.material:material:${project.design_version}"
@@ -76,4 +77,10 @@ dependencies {
 
     // picasso
     implementation "com.squareup.picasso:picasso:${project.picasso_version}"
+
+    // Orbit2
+    implementation("com.babylon.orbit2:orbit-rxjava2:${project.orbit2_version}")
+    implementation("com.babylon.orbit2:orbit-viewmodel:${project.orbit2_version}")
+    implementation("com.babylon.orbit2:orbit-livedata:${project.orbit2_version}")
+    testImplementation("com.babylon.orbit2:orbit-test:${project.orbit2_version}")
 }
