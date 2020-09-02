@@ -36,6 +36,8 @@ data class PostItem(
     fun empty() : PostItem {
       return PostItem(-1, "", "", "")
     }
+
+    const val TAG = "POST"
   }
 
   override fun writeToParcel(parcel: Parcel, flags: Int) {

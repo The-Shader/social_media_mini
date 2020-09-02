@@ -7,11 +7,9 @@ import com.babylon.orbit2.ContainerHost
 import com.babylon.orbit2.reduce
 import com.babylon.orbit2.rxjava2.transformRx2Observable
 import com.babylon.orbit2.viewmodel.container
-import com.fireblade.core.comment.CommentItem
 import com.fireblade.core.model.State
 import com.fireblade.core.post.PostItem
 import com.fireblade.persistence.ISocialMediaRepository
-import com.fireblade.persistence.comment.Comment
 import javax.inject.Inject
 
 class DetailedPostViewModel @Inject constructor(
@@ -19,27 +17,43 @@ class DetailedPostViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
 ) : ContainerHost<DetailedPostScreenState, Nothing>, ViewModel() {
 
-    private val postItem: PostItem = savedStateHandle.get<PostItem>("POST") ?: PostItem.empty()
+    private val postItem: PostItem = savedStateHandle.get<PostItem>(PostItem.TAG) ?: PostItem.empty()
 
     override val container =
-        container<DetailedPostScreenState, Nothing>(DetailedPostScreenState(postItem = postItem)) {
+        container<DetailedPostScreenState, Nothing>(DetailedPostScreenState(postItem = postItem), savedStateHandle) {
             if (it.comments.isEmpty()) {
                 loadComments()
+            } else {
+                onCommentsLoaded()
             }
         }
 
     private fun loadComments() = orbit {
         transformRx2Observable {
-            socialMediaRepository.getCommentsByPost(postItem.id)
-                .map { it.map(Comment::toCommentItem) }
-                .toObservable()
+            socialMediaRepository.getCommentsByPost(postItem.id).toObservable()
         }
             .reduce {
-                state.copy(
-                    detailState = State.Ready,
-                    comments = event
-                )
+                if (postItem == PostItem.empty()) {
+                    state.copy(
+                        detailState = State.Error
+                    )
+                } else {
+                    state.copy(
+                        detailState = State.Ready,
+                        postItem = postItem,
+                        comments = event
+                    )
+                }
             }
+    }
+
+    private fun onCommentsLoaded() = orbit {
+        reduce {
+            state.copy(
+                detailState = State.Ready,
+                postItem = postItem
+            )
+        }
     }
 
     class Factory(
@@ -56,8 +70,3 @@ class DetailedPostViewModel @Inject constructor(
         }
     }
 }
-
-fun Comment.toCommentItem(): CommentItem =
-    CommentItem(
-        content = body
-    )

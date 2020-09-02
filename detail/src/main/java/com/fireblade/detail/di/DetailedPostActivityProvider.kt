@@ -7,6 +7,6 @@ import dagger.android.ContributesAndroidInjector
 
 @Module
 abstract class DetailedPostActivityProvider {
-  @ContributesAndroidInjector(modules = [DetailedPostActivityModule::class, PersistenceModule::class])
+  @ContributesAndroidInjector(modules = [PersistenceModule::class])
   abstract fun bindDetailsActivity(): DetailedPostActivity
 }
