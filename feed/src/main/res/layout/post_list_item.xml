@@ -6,93 +6,109 @@
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_margin="15sp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/user_layout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.3"
+        android:orientation="vertical"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.3"
+        android:orientation="horizontal"/>
+
+        <TextView
+            android:id="@+id/author_textview"
+            android:text="@string/full_name"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/horizontal_guideline"
             app:layout_constraintVertical_bias="0"
-            app:layout_constraintHorizontal_bias="0">
+            android:textSize="16sp"
+            android:layout_marginStart="5sp"
+            android:layout_marginBottom="5sp"
+            android:layout_marginEnd="5sp"
+            android:textStyle="bold"
+            android:textAlignment="viewStart"
+            android:maxLines="2"
+            android:ellipsize="end"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
 
-        <TextView android:id="@+id/author_textview"
-                  android:text="@string/full_name"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintTop_toTopOf="parent"
-                  app:layout_constraintBottom_toTopOf="@+id/user_avatar"
-                  app:layout_constraintVertical_bias="0"
-                  app:layout_constraintHorizontal_bias="0"
-                  android:textSize="16sp"
-                  android:layout_margin="5sp"
-                  android:textStyle="bold"
-                  android:textAlignment="center"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"/>
-
-        <ImageView android:id="@+id/user_avatar"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:contentDescription="@string/user_avatar"
-                   android:minWidth="100dp"
-                   android:minHeight="100dp"
-                   android:maxWidth="150dp"
-                   android:maxHeight="150dp"
-                   app:layout_constraintHorizontal_bias="0"
-                   tools:background="@drawable/ic_user_avatar_placeholder"
-                   tools:backgroundTint="@color/colorPrimaryDark"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintTop_toBottomOf="@id/author_textview"
-                   app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/user_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/user_avatar"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
+            android:maxWidth="150dp"
+            android:maxHeight="150dp"
+            app:layout_constraintHorizontal_bias="0"
+            tools:background="@drawable/ic_user_avatar_placeholder"
+            tools:backgroundTint="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/vertical_guideline"
+            app:layout_constraintTop_toBottomOf="@id/horizontal_guideline"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
 
-    <TextView android:id="@+id/title_textview"
-              android:text="@string/title"
-              app:layout_constraintStart_toEndOf="@id/user_layout"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintTop_toTopOf="parent"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintVertical_bias="0"
-              app:layout_constraintHorizontal_bias="0.1"
-              android:textSize="16sp"
-              android:layout_margin="5sp"
-              android:textStyle="bold"
-              android:maxLength="30"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/title_textview"
+        android:text="@string/title"
+        app:layout_constraintStart_toEndOf="@+id/vertical_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/horizontal_guideline"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:textSize="16sp"
+        android:layout_marginBottom="5sp"
+        android:layout_marginStart="5sp"
+        android:layout_marginEnd="5sp"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
 
-    <TextView android:id="@+id/body_textview"
-              android:text="@string/content"
-              app:layout_constraintStart_toEndOf="@id/user_layout"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintTop_toBottomOf="@+id/title_textview"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintVertical_bias="0"
-              app:layout_constraintHorizontal_bias="0.1"
-              android:textSize="14sp"
-              android:layout_margin="5sp"
-              android:maxLength="50"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/body_textview"
+        android:text="@string/content"
+        app:layout_constraintStart_toStartOf="@+id/title_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontal_guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintHorizontal_bias="0"
+        android:textSize="14sp"
+        android:layout_margin="5sp"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"/>
 
-    <TextView android:id="@+id/num_of_comments_textview"
-              android:drawableStart="@drawable/ic_chat_bubble_outline"
-              android:layout_margin="5sp"
-              android:textSize="16sp"
-              android:text="@string/number_of_comments"
-              app:layout_constraintStart_toEndOf="@id/user_layout"
-              app:layout_constraintEnd_toEndOf="parent"
-              app:layout_constraintTop_toBottomOf="@id/body_textview"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintVertical_bias="1"
-              app:layout_constraintHorizontal_bias="0.1"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/num_of_comments_textview"
+        android:drawableStart="@drawable/ic_chat_bubble_outline"
+        android:layout_marginBottom="5sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginEnd="5sp"
+        android:textSize="16sp"
+        android:text="@string/number_of_comments"
+        app:layout_constraintStart_toStartOf="@+id/title_textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/body_textview"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintHorizontal_bias="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
