@@ -16,6 +16,7 @@ The following features and techniques have been implemented/used:
 Missing/can be improved:
 * Migration to coroutines which Orbit2 uses internally anyway
 * Better state handling with loading indicators
+* Start using styles and themes
 * Introduce `Dagger Hilt` for `AssistedInject` and `ViewModelInject` in order to get rid of the `ViewModelFactory` and remove the dependencies from the `Activities/Fragments`
 * Much more unittests and UI tests
 * Bitrise integration for continuous integration and automatic deploy into the Play store
@@ -32,4 +33,4 @@ Missing/can be improved:
 
 Feed View | Detailed View
 --------- | -------------
-![Feed page image](https://github.com/The-Shader/social_media_mini/blob/master/feed_screen.png) | ![Detailed page image](https://github.com/The-Shader/social_media_mini/blob/master/detailed_screen.png)
+![Feed page image](https://github.com/The-Shader/social_media_mini/blob/develop/feed_screen.png) | ![Detailed page image](https://github.com/The-Shader/social_media_mini/blob/develop/detailed_screen.png)
