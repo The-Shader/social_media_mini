@@ -20,9 +20,11 @@ class DetailedPostViewModel @Inject constructor(
     private val postItem: PostItem = savedStateHandle.get<PostItem>(PostItem.TAG) ?: PostItem.empty()
 
     override val container =
-        container<DetailedPostScreenState, Nothing>(DetailedPostScreenState(postItem = postItem)) {
+        container<DetailedPostScreenState, Nothing>(DetailedPostScreenState(postItem = postItem), savedStateHandle) {
             if (it.comments.isEmpty()) {
                 loadComments()
+            } else {
+                onCommentsLoaded()
             }
         }
 
@@ -43,6 +45,15 @@ class DetailedPostViewModel @Inject constructor(
                     )
                 }
             }
+    }
+
+    private fun onCommentsLoaded() = orbit {
+        reduce {
+            state.copy(
+                detailState = State.Ready,
+                postItem = postItem
+            )
+        }
     }
 
     class Factory(

@@ -16,6 +16,8 @@ class FeedViewModel @Inject constructor(
     override val container = container<FeedScreenState, FeedSideEffect>(FeedScreenState()) {
         if (it.posts.isEmpty()) {
             loadPostItems()
+        } else {
+            onPostItemsLoaded()
         }
     }
 
@@ -29,6 +31,14 @@ class FeedViewModel @Inject constructor(
                     posts = event
                 )
             }
+    }
+
+    private fun onPostItemsLoaded() = orbit {
+        reduce {
+            state.copy(
+                feedState = State.Ready
+            )
+        }
     }
 
     fun onPostItemClicked(postItem: PostItem) = orbit {
